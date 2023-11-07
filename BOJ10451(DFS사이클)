@@ -1,0 +1,32 @@
+import sys
+sys.setrecursionlimit(10**6)
+
+def dfs(x):
+    global count
+    visited[x] = True
+    nxt = nums[x]
+    
+    if visited[nxt] == True:
+        count += 1
+        return
+    else:
+        dfs(nxt)
+
+T = int(input())
+answer = []
+for i in range(T):
+    N = int(input())
+    visited = [False] * (N+1)
+    nums = list(map(int,input().split()))
+    nums.insert(0,0)
+    global count
+    count = 0
+    
+    for j in range(1,N+1):
+        if visited[j] == False:
+            dfs(j)
+            
+    answer.append(count)
+
+for i in answer:
+    print(i)
